@@ -15,15 +15,15 @@ def getExplainPlanAnalysis(file_path):
     print('\nObjects scanned')
     print(getValueCounts(column='objects', operation_type='TableScan', df=operations).to_markdown())
 
+    print('\nObject partitions')
+    print(operations.explode('objects')[['objects', 'partitionsAssigned', 'partitionsTotal', 'bytesAssigned']] \
+        .groupby('objects').agg(['max']).to_markdown())
+
     print('\nFiltered columns')
     print(operations[operations['operation'] == 'TableScan'].explode('objects').explode('expressions')[['objects', 'expressions']] \
         .groupby(['objects']).agg(
             columns=('expressions', set)
         ).to_markdown())
-
-    print('\nObject partitions')
-    print(operations.explode('objects')[['objects', 'partitionsAssigned', 'partitionsTotal', 'bytesAssigned']] \
-        .groupby('objects').agg(['sum']).to_markdown())
 
     print('\nFilter expressions')
     print(getValueCounts(column='expressions', operation_type='Filter', df=operations).to_markdown())
