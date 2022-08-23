@@ -1,4 +1,5 @@
 import json
+import numpy as np
 import pandas as pd
 
 # Prints explain plan analysis to stdout
@@ -19,14 +20,35 @@ def getExplainPlanAnalysis(file_path):
     print(operations.explode('objects')[['objects', 'partitionsAssigned', 'partitionsTotal', 'bytesAssigned']] \
         .groupby('objects').agg(['max']).to_markdown())
 
-    print('\nFiltered columns')
-    print(operations[operations['operation'] == 'TableScan'].explode('objects').explode('expressions')[['objects', 'expressions']] \
-        .groupby(['objects']).agg(
-            columns=('expressions', set)
-        ).to_markdown())
+    # Filter info
+    print('\nFilter details')
+    filter_expressions = operations[operations['operation'] == 'Filter'].explode('expressions')
+    child_ops = pd.merge(filter_expressions, operations, how='left', left_on='id', right_on='parent', suffixes=['', '_child'])
+    grandchild_ops = pd.merge(child_ops, operations, how='left', left_on='id_child', right_on='parent', suffixes=['', '_grandchild'])
 
-    print('\nFilter expressions')
-    print(getValueCounts(column='expressions', operation_type='Filter', df=operations).to_markdown())
+    filter_ops = grandchild_ops[['id', 'operation', 'expressions', 'objects_child', 'objects_grandchild', 'expressions_child', 'expressions_grandchild']]
+    filter_ops = filter_ops.explode('objects_child') \
+        .explode('objects_grandchild') \
+        .explode('expressions_child') \
+        .explode('expressions_grandchild')
+
+    filter_ops['table'] = filter_ops['objects_child'].combine_first(filter_ops['objects_grandchild'])
+    filter_ops['column'] = np.where(filter_ops['expressions_child'].str.contains('joinKey:'), 
+                                        filter_ops['expressions_grandchild'], filter_ops['expressions_child'])
+    filter_ops['filter_type'] = np.where(filter_ops['expressions'].str.contains(' IN '), 'IN',
+                                np.where(filter_ops['expressions'].str.contains('NOT\('), 'NOT',
+                                np.where(filter_ops['expressions'].str.contains('CONTAINS\('), 'CONTAINS', 'NA')))
+
+    print(filter_ops[['expressions', 'table', 'column', 'filter_type']].to_markdown())
+
+    # print('\nFiltered columns')
+    # print(operations[operations['operation'] == 'TableScan'].explode('objects').explode('expressions')[['objects', 'expressions']] \
+    #     .groupby(['objects']).agg(
+    #         columns=('expressions', set)
+    #     ).to_markdown())
+
+    # print('\nFilter expressions')
+    # print(getValueCounts(column='expressions', operation_type='Filter', df=operations).to_markdown())
 
     print('\nJoinFilter expressions')
     print(getValueCounts(column='expressions', operation_type='JoinFilter', df=operations).to_markdown())
