@@ -1,6 +1,8 @@
 import json
 import pandas as pd
 
+# Prints explain plan analysis to stdout
+# Takes the file path to the explain plan file
 def getExplainPlanAnalysis(file_path):
     global_stats, operations = readExplainPlanFile(file_path)
 

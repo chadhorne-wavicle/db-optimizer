@@ -1,3 +1,5 @@
+import sys
 from src import functions as fx
 
-fx.getExplainPlanAnalysis(file_path='data/Explain Plan generated.JSON')
+file_path_argument = sys.argv[1]
+fx.getExplainPlanAnalysis(file_path=file_path_argument)
