@@ -13,8 +13,13 @@ def getExplainPlanAnalysis(file_path):
     print(operations['operation'].value_counts().to_markdown())
 
     print('\nObjects scanned')
-    # print(operations[operations['operation'] == 'TableScan'].explode('objects')['objects'].value_counts().to_markdown())
     print(getValueCounts(column='objects', operation_type='TableScan', df=operations).to_markdown())
+
+    print('\nFiltered columns')
+    print(operations[operations['operation'] == 'TableScan'].explode('objects').explode('expressions')[['objects', 'expressions']] \
+        .groupby(['objects']).agg(
+            columns=('expressions', set)
+        ).to_markdown())
 
     print('\nObject partitions')
     print(operations.explode('objects')[['objects', 'partitionsAssigned', 'partitionsTotal', 'bytesAssigned']] \
