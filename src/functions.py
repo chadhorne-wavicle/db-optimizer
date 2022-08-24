@@ -65,6 +65,12 @@ def getExplainPlanAnalysis(file_path):
 def getValueCounts(column, operation_type, df):
     agg_df = df[df['operation'] == operation_type].explode(column)[column].value_counts()
     return agg_df
+
+# Returns history of select queries from Snowflake
+def getQueryHistory():
+    #TODO Get query history from Snowflake DW
+    # Use env variables for connection details
+    return result_df
     
 # Parses the Explain Plan json file and returns two dataframes,
 # one with the global stats and one with the operations
