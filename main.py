@@ -9,5 +9,14 @@
 import sys
 from src import functions as fx
 
+#TODO Pull query history from Snowflake DW
+
+#TODO Identify similar queries from query history results
+
+#TODO Generate the Explain Plan file for a given query
+
+# Analyze the Explain Plan
 file_path_argument = sys.argv[1]
 fx.getExplainPlanAnalysis(file_path=file_path_argument)
+
+#TODO Provide suggestion for wide table creation for similar queries
