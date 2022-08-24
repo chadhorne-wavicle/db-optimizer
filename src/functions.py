@@ -37,7 +37,8 @@ def getExplainPlanAnalysis(file_path):
                                         filter_ops['expressions_grandchild'], filter_ops['expressions_child'])
     filter_ops['filter_type'] = np.where(filter_ops['expressions'].str.contains(' IN '), 'IN',
                                 np.where(filter_ops['expressions'].str.contains('NOT\('), 'NOT',
-                                np.where(filter_ops['expressions'].str.contains('CONTAINS\('), 'CONTAINS', 'NA')))
+                                np.where(filter_ops['expressions'].str.contains(' = '), 'EQUALS',
+                                np.where(filter_ops['expressions'].str.contains('CONTAINS\('), 'CONTAINS', 'OTHER'))))
 
     print(filter_ops[['expressions', 'table', 'column', 'filter_type']].to_markdown())
 
