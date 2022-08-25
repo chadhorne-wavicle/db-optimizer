@@ -10,8 +10,16 @@ def getExplainPlanAnalysis(file_path):
     print('\nGlobal Stats')
     print(global_stats.to_markdown(index=False))
 
+    # Number of each operation type
+    operation_summary = operations['operation'].value_counts()
+    # Get number of table scans for wide table suggestion
+    num_tablescans = operation_summary[operation_summary.index == 'TableScan'][0]
     print('\nCount of operations')
-    print(operations['operation'].value_counts().to_markdown())
+    print(operation_summary.to_markdown())
+
+    if (num_tablescans > 2):
+        print(f'\n***There were {num_tablescans} tables scanned during this query*** \
+        \n***Consider joining them into a wide table to improve query performance***')
 
     print('\nObjects scanned')
     print(getValueCounts(column='objects', operation_type='TableScan', df=operations).to_markdown())
@@ -41,21 +49,6 @@ def getExplainPlanAnalysis(file_path):
                                 np.where(filter_ops['expressions'].str.contains('CONTAINS\('), 'CONTAINS', 'OTHER'))))
 
     print(filter_ops[['expressions', 'table', 'column', 'filter_type']].to_markdown())
-
-    # print('\nFiltered columns')
-    # print(operations[operations['operation'] == 'TableScan'].explode('objects').explode('expressions')[['objects', 'expressions']] \
-    #     .groupby(['objects']).agg(
-    #         columns=('expressions', set)
-    #     ).to_markdown())
-
-    # print('\nFilter expressions')
-    # print(getValueCounts(column='expressions', operation_type='Filter', df=operations).to_markdown())
-
-    print('\nJoinFilter expressions')
-    print(getValueCounts(column='expressions', operation_type='JoinFilter', df=operations).to_markdown())
-
-    print('\nInnerJoin expressions')
-    print(getValueCounts(column='expressions', operation_type='InnerJoin', df=operations).to_markdown())
 
     print('\nSort expressions')
     print(getValueCounts(column='expressions', operation_type='Sort', df=operations).to_markdown())
