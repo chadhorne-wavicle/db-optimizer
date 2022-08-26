@@ -63,6 +63,13 @@ def getValueCounts(column, operation_type, df):
 def getQueryHistory():
     #TODO Get query history from Snowflake DW
     # Use env variables for connection details
+
+    query_string = """
+    select query_id,query_text
+    from table(information_schema.query_history(RESULT_LIMIT=>10000))
+    where query_type = 'SELECT'
+    order by start_time desc;
+    """
     return
 
 # Parses the Explain Plan json file and returns two dataframes,
