@@ -9,6 +9,7 @@
 import os
 import sys
 import argparse
+from dotenv import load_dotenv
 
 from src import functions as fx
 
@@ -29,11 +30,26 @@ if not os.path.isfile(explain_plan_file_path):
     print('The file does not exist')
     sys.exit()
 
-#TODO Pull query history from Snowflake DW
+# Get environment variables
+load_dotenv()
+ACCOUNT = os.environ.get('ACCOUNT')
+USER = os.environ.get('USER')
+PASSWORD = os.environ.get('PASSWORD')
+WAREHOUSE = os.environ.get('WAREHOUSE')
+DATABASE = os.environ.get('DATABASE')
+SCHEMA = os.environ.get('SCHEMA')
+
+# Pull query history from Snowflake DW
+query_history = fx.getQueryHistory(account=ACCOUNT,
+                                    user=USER,
+                                    password=PASSWORD,
+                                    warehouse=WAREHOUSE,
+                                    database=DATABASE,
+                                    schema=SCHEMA)
 
 #TODO Identify similar queries from query history results
 
 #TODO Generate the Explain Plan file for a given query
 
 # Analyze the Explain Plan
-fx.getExplainPlanAnalysis(file_path=explain_plan_file_path)
+# fx.getExplainPlanAnalysis(file_path=explain_plan_file_path)

@@ -1,6 +1,10 @@
+import os
 import json
 import numpy as np
 import pandas as pd
+
+from dotenv import load_dotenv
+from snowflake.snowpark.session import Session
 
 # Prints explain plan analysis to stdout
 # Takes the file path to the explain plan file
@@ -60,17 +64,31 @@ def getValueCounts(column, operation_type, df):
     return agg_df
 
 # Returns history of select queries from Snowflake
-def getQueryHistory():
+def getQueryHistory(account, user, password, warehouse, database, schema):
     #TODO Get query history from Snowflake DW
-    # Use env variables for connection details
+    
+    # Set Snowflake credentials
+    snowflake_params =  {
+        'account': account,
+        'user': user,
+        'password': password,
+        'warehouse': warehouse,
+        'database': database,
+        'schema': schema
+    }
 
+    # Get Snowflake query history
     query_string = """
     select query_id,query_text
     from table(information_schema.query_history(RESULT_LIMIT=>10000))
     where query_type = 'SELECT'
     order by start_time desc;
     """
-    return
+    session = Session.builder.configs(snowflake_params).create()
+
+    query_history_df = session.sql(query_string)
+
+    return query_history_df
 
 # Parses the Explain Plan json file and returns two dataframes,
 # one with the global stats and one with the operations
