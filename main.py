@@ -6,8 +6,28 @@
 # 4.	Find out tables, filters conditions, stats, etc from the explain plan so generated (Explain Plan generated.json)
 # 5.	Suggest Wide table creation for the similar queries 
 
+import os
 import sys
+import argparse
+
 from src import functions as fx
+
+# Define arguments
+arg_parser = argparse.ArgumentParser(prog='db-optimizer',
+    description='Analyze query history and identify opportunities to improve performance')
+
+arg_parser.add_argument('ExplainPlanFilePath',
+                        metavar='explain_plan_file_path',
+                        type=str,
+                        help='the path to the explain plan file')
+
+# Parse arguments
+args = arg_parser.parse_args()
+explain_plan_file_path = args.ExplainPlanFilePath
+
+if not os.path.isfile(explain_plan_file_path):
+    print('The file does not exist')
+    sys.exit()
 
 #TODO Pull query history from Snowflake DW
 
@@ -16,7 +36,4 @@ from src import functions as fx
 #TODO Generate the Explain Plan file for a given query
 
 # Analyze the Explain Plan
-file_path_argument = sys.argv[1]
-fx.getExplainPlanAnalysis(file_path=file_path_argument)
-
-#TODO Provide suggestion for wide table creation for similar queries
+fx.getExplainPlanAnalysis(file_path=explain_plan_file_path)
