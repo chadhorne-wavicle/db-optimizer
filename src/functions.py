@@ -16,10 +16,11 @@ def getExplainPlanAnalysis(file_path):
 
     # Number of each operation type
     operation_summary = operations['operation'].value_counts()
-    # Get number of table scans for wide table suggestion
-    num_tablescans = operation_summary[operation_summary.index == 'TableScan'][0]
     print('\nCount of operations')
     print(operation_summary.to_markdown())
+
+    # Get number of table scans for wide table suggestion
+    num_tablescans = operation_summary[operation_summary.index == 'TableScan'][0]
 
     if (num_tablescans > 4):
         print(f'\n***There were {num_tablescans} tables scanned during this query*** \
@@ -58,11 +59,6 @@ def getExplainPlanAnalysis(file_path):
     print(getValueCounts(column='expressions', operation_type='Sort', df=operations).to_markdown())
 
 
-# Helper function to get value counts
-def getValueCounts(column, operation_type, df):
-    agg_df = df[df['operation'] == operation_type].explode(column)[column].value_counts()
-    return agg_df
-
 # Returns history of select queries from Snowflake
 def getQueryHistory(account, user, password, warehouse, database, schema):
     #TODO Get query history from Snowflake DW
@@ -89,6 +85,16 @@ def getQueryHistory(account, user, password, warehouse, database, schema):
     query_history_df = session.sql(query_string)
 
     return query_history_df
+
+# Get queries that are similar and group together
+def getSimilarQueries():
+    #TODO Research SQL analysis libraries for this
+    pass
+
+# Helper function to get value counts
+def getValueCounts(column, operation_type, df):
+    agg_df = df[df['operation'] == operation_type].explode(column)[column].value_counts()
+    return agg_df
 
 # Parses the Explain Plan json file and returns two dataframes,
 # one with the global stats and one with the operations

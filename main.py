@@ -39,17 +39,20 @@ WAREHOUSE = os.environ.get('WAREHOUSE')
 DATABASE = os.environ.get('DATABASE')
 SCHEMA = os.environ.get('SCHEMA')
 
+#TODO Create new Snowflake trial account
 # Pull query history from Snowflake DW
-query_history = fx.getQueryHistory(account=ACCOUNT,
-                                    user=USER,
-                                    password=PASSWORD,
-                                    warehouse=WAREHOUSE,
-                                    database=DATABASE,
-                                    schema=SCHEMA)
+# query_history = fx.getQueryHistory(account=ACCOUNT,
+#                                     user=USER,
+#                                     password=PASSWORD,
+#                                     warehouse=WAREHOUSE,
+#                                     database=DATABASE,
+#                                     schema=SCHEMA)
+
+#TODO Write query history to temp file for testing
 
 #TODO Identify similar queries from query history results
 
 #TODO Generate the Explain Plan file for a given query
 
 # Analyze the Explain Plan
-# fx.getExplainPlanAnalysis(file_path=explain_plan_file_path)
+fx.getExplainPlanAnalysis(file_path=explain_plan_file_path)
