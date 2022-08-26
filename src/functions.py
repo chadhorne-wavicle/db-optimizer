@@ -17,7 +17,7 @@ def getExplainPlanAnalysis(file_path):
     print('\nCount of operations')
     print(operation_summary.to_markdown())
 
-    if (num_tablescans > 2):
+    if (num_tablescans > 4):
         print(f'\n***There were {num_tablescans} tables scanned during this query*** \
         \n***Consider joining them into a wide table to improve query performance***')
 
@@ -63,8 +63,8 @@ def getValueCounts(column, operation_type, df):
 def getQueryHistory():
     #TODO Get query history from Snowflake DW
     # Use env variables for connection details
-    return result_df
-    
+    return
+
 # Parses the Explain Plan json file and returns two dataframes,
 # one with the global stats and one with the operations
 def readExplainPlanFile(file_path):
