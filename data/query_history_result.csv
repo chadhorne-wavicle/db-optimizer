@@ -1,0 +1,734 @@
+﻿QUERY_ID,QUERY_TEXT
+01a605d7-0000-6222-0001-753a0003719e,"select query_id,query_text
+from table(information_schema.query_history())
+order by start_time desc;"
+01a605d7-0000-6174-0001-753a0003904a,"select *
+from table(information_schema.query_history())
+order by start_time desc;"
+01a605d5-0000-6211-0001-753a000331da,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'MEDIUM ANODIZED TIN'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a605d4-0000-6174-0001-753a0003903e,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'PROMO BURNISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a605d4-0000-6211-0001-753a000331ae,"select p_type,count(*) from part
+group by p_type
+order by 2 desc;"
+01a605a7-0000-6222-0001-753a0003717e,"select query_id,query_text
+from table(information_schema.query_history())
+order by start_time desc;"
+01a605a6-0000-6219-0001-753a00038132,"select *
+from table(information_schema.query_history())"
+01a605a4-0000-6215-0001-753a0003224e,"select query_text
+from table(information_schema.query_history())
+order by start_time desc;"
+01a605a4-0000-6215-0001-753a0003224a,"select query_text
+from table(information_schema.query_history(dateadd('hours',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a60588-0000-6222-0001-753a00037146,"select p_type,count(*) from part
+group by p_type;"
+01a60582-0000-6222-0001-753a00037132,"select system$explain_plan_json(
+    'SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".part part
+ CROSS JOIN
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".supplier supplier'
+    ) as explain_plan;"
+01a6057a-0000-6211-0001-753a0003313e,"explain 
+select query_text
+from table(information_schema.query_history())"
+01a6057a-0000-6219-0001-753a000380e2,"select query_text
+from table(information_schema.query_history())"
+01a6057a-0000-621d-0001-753a0003412a,"select querytext
+from table(information_schema.query_history())"
+01a60578-0000-6219-0001-753a000380ae,"explain 
+SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".part part
+ CROSS JOIN
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".supplier supplier"
+01a60577-0000-6219-0001-753a00038092,"SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".part part
+ CROSS JOIN
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".supplier supplier"
+01a6056b-0000-6219-0001-753a00038086,"select *
+from table(information_schema.query_history())
+order by start_time desc;"
+01a6056b-0000-6215-0001-753a00032216,"SELECT
+     l_orderkey,
+     SUM(l_extendedprice * (1 - l_discount)) AS revenue,
+     o_orderdate,
+     o_shippriority
+ FROM  customer, orders, lineitem
+WHERE c_mktsegment = 'BUILDING1'
+  AND c_custkey = o_custkey
+  AND l_orderkey = o_orderkey
+  AND o_orderdate < to_date('1995-03-15') -- MDY(3, 15, 1995)
+  AND l_shipdate > to_date('1995-03-15') -- MDY(3, 15, 1995)
+GROUP BY l_orderkey, o_orderdate, o_shippriority
+ORDER BY revenue DESC,  o_orderdate"
+01a6056a-0000-620a-0001-753a000311ea,"select *
+from table(information_schema.query_history())
+order by start_time desc;"
+01a60565-0000-6222-0001-753a0003707e,"select *
+from table(information_schema.query_history)"
+01a60563-0000-621d-0001-753a00034092,SHOW GRANTS TO USER identifier('""ACCT_ADMIN""');
+01a604df-0000-6215-0001-753a000321a2,"explain 
+SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".supplier supplier"
+01a604d8-0000-6222-0001-753a00037052,"explain 
+SELECT COUNT(1)
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.ORDERS O
+ON C.C_CUSTKEY = O.O_CUSTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.LINEITEM L
+ON O.O_ORDERKEY = L.L_ORDERKEY;"
+01a604d7-0000-6211-0001-753a0003306a,"explain plan 
+SELECT COUNT(1)
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.ORDERS O
+ON C.C_CUSTKEY = O.O_CUSTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.LINEITEM L
+ON O.O_ORDERKEY = L.L_ORDERKEY;"
+01a60440-0000-6215-0001-753a0003214e,"SELECT COUNT(1)
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.ORDERS O
+ON C.C_CUSTKEY = O.O_CUSTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.LINEITEM L
+ON O.O_ORDERKEY = L.L_ORDERKEY;"
+01a60434-0000-620a-0001-753a00031152,"SELECT COUNT(1)
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.ORDERS O
+ON C.C_CUSTKEY = O.O_CUSTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.LINEITEM L
+ON O.O_ORDERKEY = L.L_ORDERKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.PART P
+ON L.L_PARTKEY = P.P_PARTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.PARTSUPP PS
+ON P.P_PARTKEY = PS.PS_PARTKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.SUPPLIER S
+ON L.L_SUPPKEY = S.S_SUPPKEY
+"
+01a60432-0000-6219-0001-753a0003602e,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'N' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60432-0000-620a-0001-753a0003114e,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'N' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60431-0000-6215-0001-753a00032142,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'O' in account
+01a60431-0000-621d-0001-753a0003403a,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'O' in account
+01a60431-0000-621d-0001-753a00034036,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'L_LINENUMBER' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60431-0000-620a-0001-753a0003114a,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'L_COMMENT' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60431-0000-6219-0001-753a0003602a,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'L_COMMENT' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60431-0000-6211-0001-753a0003301e,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'L_LINENUMBER' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60430-0000-6215-0001-753a0003213e,"SELECT CURRENT_DATABASE(), CURRENT_SCHEMA()"
+01a60430-0000-6215-0001-753a0003213a,"SELECT COUNT(1)
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY 
+"
+01a60430-0000-620a-0001-753a00031146,"SELECT CURRENT_DATABASE(), CURRENT_SCHEMA()"
+01a60430-0000-620a-0001-753a00031142,USE WAREHOUSE COMPUTE_WH
+01a60430-0000-620a-0001-753a0003113e,"SELECT COUNT(1)
+
+FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.CUSTOMER C
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.NATION N
+ON C.C_NATIONKEY = N.N_NATIONKEY 
+INNER JOIN SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000.REGION R
+ON N.N_REGIONKEY = R.R_REGIONKEY "
+01a6042f-0000-620a-0001-753a0003113a,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'L_SHIPINSTRUCT' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042f-0000-620a-0001-753a00031136,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'L_SHIPINSTRUCT' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042f-0000-620a-0001-753a00031132,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'L_LINENUMBER' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042f-0000-620a-0001-753a0003112e,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'L_LINENUMBER' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042f-0000-6219-0001-753a00036026,show /* JDBC:DatabaseMetaData.getProcedures() */ procedures like 'O_TOTALPRICE' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042f-0000-6219-0001-753a00036022,show /* JDBC:DatabaseMetaData.getTables() */ objects like 'O_TOTALPRICE' in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042c-0000-6219-0001-753a0003601e,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042c-0000-6219-0001-753a0003601a,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042a-0000-621d-0001-753a00034032,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042a-0000-6219-0001-753a00036016,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042a-0000-6215-0001-753a00032136,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042a-0000-621d-0001-753a0003402e,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a6042a-0000-621d-0001-753a0003402a,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60429-0000-6215-0001-753a00032132,show /* JDBC:DatabaseMetaData.getColumns() */ columns in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60429-0000-6219-0001-753a00036012,show /* JDBC:DatabaseMetaData.getTables() */ objects in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60429-0000-6219-0001-753a0003600e,USE SCHEMA TPCH_SF1000
+01a60429-0000-6211-0001-753a0003301a,USE DATABASE SNOWFLAKE_SAMPLE_DATA
+01a60429-0000-621d-0001-753a00034026,show /* JDBC:DatabaseMetaData.getSchemas() */ schemas in database ""SNOWFLAKE_SAMPLE_DATA""
+01a60428-0000-621d-0001-753a00034022,show /* JDBC:DatabaseMetaData.getCatalogs() */ databases in account
+01a60428-0000-6211-0001-753a00033016,"SELECT CURRENT_DATABASE(), CURRENT_SCHEMA()"
+01a60428-0000-621d-0001-753a0003401e,"SELECT CURRENT_DATABASE(), CURRENT_SCHEMA()"
+01a60428-0000-6211-0001-753a00033012,SHOW ROLES
+01a60428-0000-6215-0001-753a0003212e,SHOW SCHEMAS
+01a60428-0000-621d-0001-753a0003401a,SHOW WAREHOUSES
+01a60428-0000-620a-0001-753a0003112a,SHOW DATABASES
+01a60428-0000-620a-0001-753a00031126,show /* JDBC:DatabaseMetaData.getCatalogs() */ databases in account
+01a60428-0000-620a-0001-753a00031122,"SELECT CURRENT_DATABASE(), CURRENT_SCHEMA()"
+01a60425-0000-6211-0001-753a0003300a,SHOW GRANTS TO USER identifier('""ACCT_ADMIN2""');
+01a603e9-0000-6215-0001-753a00032122,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'LARGE POLISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a603c8-0000-6215-0001-753a00032106,SELECT COUNT(1) FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".""ORDERS"";
+01a603c8-0000-620a-0001-753a000310da,"SELECT * FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".""ORDERS""
+LIMIT 10;"
+01a603c7-0000-620a-0001-753a000310be,"SELECT * FROM ""SNOWFLAKE_SAMPLE_DATA"".""WEATHER"".""WEATHER_14_TOTAL""
+LIMIT 10;"
+01a60188-0000-620b-0001-753a0002d4ba,"SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1"".supplier supplier"
+01a6016f-0000-6205-0001-753a0002e02e,"SELECT 
+     p_partkey,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier"
+01a60144-0000-620b-0001-753a0002d46a,"select QUERY_TEXT, count(1)
+from table(information_schema.query_history(dateadd('hours',-24,current_timestamp()),current_timestamp()))
+group by 1
+order by 1"
+01a60141-0000-620a-0001-753a0002b8aa,"select *
+from table(information_schema.query_history(dateadd('hours',-20,current_timestamp()),current_timestamp()))"
+01a60127-0000-620b-0001-753a0002d44a,"select *
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+where query_id in ('01a60124-0000-620a-0001-753a0002b862','01a6011f-0000-620a-0001-753a0002b82e','01a6011e-0000-620a-0001-753a0002b82a')
+order by start_time desc;"
+01a60124-0000-6205-0001-753a0002a8f6,"select *
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+order by start_time desc;"
+01a60124-0000-620a-0001-753a0002b862,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'LARGE POLISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a60120-0000-6205-0001-753a0002a8f2,"select *
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+order by start_time desc;"
+01a6011f-0000-620a-0001-753a0002b82e,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'LARGE POLISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a6011e-0000-620a-0001-753a0002b82a,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'LARGE POLISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a6011e-0000-620a-0001-753a0002b812,select distinct p_type from part;
+01a6011e-0000-620a-0001-753a0002b7f6,select distinct p_type from part;
+01a6011d-0000-620a-0001-753a0002b7ea,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'SMALL PLATED NICKEL'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a6011d-0000-6205-0001-753a0002a89e,"select *
+from table(information_schema.query_history(dateadd('minute',-20,current_timestamp()),current_timestamp()))"
+01a6011c-0000-620b-0001-753a0002d3ca,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('hours',-1,current_timestamp()),current_timestamp()))
+group by query_text"
+01a6011c-0000-620a-0001-753a0002b7de,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('minute',-30,current_timestamp()),current_timestamp()))
+group by query_text"
+01a6011b-0000-6205-0001-753a0002a86e,"select *
+from table(information_schema.query_history(dateadd('minute',-20,current_timestamp()),current_timestamp()))"
+01a6011b-0000-620a-0001-753a0002b7c2,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a6011a-0000-620a-0001-753a0002b7be,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a6011a-0000-6205-0001-753a0002a85e,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a60112-0000-620b-0001-753a0002d316,SHOW GRANTS TO USER identifier('""ACCT_ADMIN2""');
+01a6010d-0000-6205-0001-753a0002a7ea,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'SMALL PLATED NICKEL'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a60109-0000-6205-0001-753a0002a7d6,"select *
+from table(information_schema.query_history(dateadd('minute',-20,current_timestamp()),current_timestamp()))"
+01a60109-0000-620b-0001-753a0002d302,"select *
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a60100-0000-6205-0001-753a0002a7ba,"select query_text,count(*)
+from table(information_schema.query_history(dateadd('minute',-10,current_timestamp()),current_timestamp()))
+group by query_text"
+01a600ff-0000-620b-0001-753a0002d2d2,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'SMALL PLATED NICKEL'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a600fe-0000-620b-0001-753a0002d2c6,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'ECONOMY BURNISHED COPPER'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a600fd-0000-6205-0001-753a0002a786,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'MEDIUM PLATED BRASS'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
+01a600fc-0000-6205-0001-753a0002a766,"SELECT 
+     s_acctbal,
+     s_name,
+     n_name,
+     p_partkey,
+     p_type,
+     p_size,
+     p_mfgr,
+     s_address,
+     s_phone,
+     s_comment
+ FROM ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".part part,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+    ""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+WHERE
+     p_partkey = ps_partkey
+     AND s_suppkey = ps_suppkey
+--   AND p_size = (SELECT p_size FROM part SAMPLE (1 ROWS))
+     AND p_type = 'ECONOMY POLISHED NICKEL'
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND ps_supplycost = (
+		SELECT
+			MIN(ps_supplycost)
+		FROM
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".partsupp partsupp,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".supplier supplier,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".nation nation,
+			""SNOWFLAKE_SAMPLE_DATA"".""TPCH_SF1000"".region region
+		WHERE
+			p_partkey = ps_partkey
+			AND s_suppkey = ps_suppkey
+			AND s_nationkey = n_nationkey
+			AND n_regionkey = r_regionkey
+			AND r_name = 'EUROPE'
+     )
+ORDER BY s_acctbal DESC, n_name, s_name, p_partkey"
