@@ -3,7 +3,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from snowflake.snowpark.session import Session
 
 # Prints explain plan analysis to stdout
@@ -87,9 +87,13 @@ def getQueryHistory(account, user, password, warehouse, database, schema):
     return query_history_df
 
 # Get queries that are similar and group together
-def getSimilarQueries():
+def getSimilarQueries(df):
     #TODO Research SQL analysis libraries for this
-    pass
+    df['QUERY_TEXT_New'] = df['QUERY_TEXT'].replace(r'\r+|\n+|\t+|\s+',' ', regex=True)
+    df['QUERY_TEXT_New'] = df['QUERY_TEXT_New'].replace(r'"','', regex=True) # as separate  as replacing it with no space
+    df['QUERY_TEXT_New'] = df['QUERY_TEXT_New'].replace(r' +',' ', regex=True) # as separate cmd as relacing it no space
+    df['QUERY_TEXT_New2'] = df['QUERY_TEXT_New'].replace(r"'.*?'", "''", regex=True)
+    
 
 # Helper function to get value counts
 def getValueCounts(column, operation_type, df):
